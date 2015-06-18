@@ -102,5 +102,7 @@ class Simulation01 extends Simulation {
 			)
 		)
 
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	var users = sys.env.getOrElse("USERS", "1").toInt
+	var time = sys.env.getOrElse("TIME", "1").toInt
+	setUp(scn.inject(rampUsers(users) over (time seconds))).protocols(httpProtocol)
 }
