@@ -41,7 +41,8 @@ class Simulation01 extends Simulation {
 		.exec(http("request_0")
 			.get("/")
 			.check(
-				status.is(200)
+				status.is(200),
+				css("input[name=form_build_id]", "value").saveAs("form_build_id")
 			)
 		)
 		.pause(waitTime)
@@ -50,7 +51,7 @@ class Simulation01 extends Simulation {
 			.headers(headers_1)
 			.formParam("name", "admin")
 			.formParam("pass", "acme")
-			.formParam("form_build_id", "form-dWA0xOwJqgkgSuYxTkEZuhPxu8HRcs4JSci07azqMZk")
+			.formParam("form_build_id", "${form_build_id}")
 			.formParam("form_id", "user_login_block")
 			.formParam("op", "Log in")
 			.check(
@@ -76,7 +77,10 @@ class Simulation01 extends Simulation {
 			.headers(headers_5)
 			.body(RawFileBody("Simulation01_0005_request.txt"))
 			.check(
-				status.is(200)
+				status.is(200),
+        css("input[name=form_build_id]", "value").saveAs("form_build_id"),
+        css("input[name=form_token]", "value").saveAs("form_token")
+
 			)
 		)
 		.pause(waitTime)
@@ -86,8 +90,8 @@ class Simulation01 extends Simulation {
 			.formParam("subject", "")
 			.formParam("comment_body[und][0][value]", "qqq")
 			.formParam("comment_body[und][0][format]", "filtered_html")
-			.formParam("form_build_id", "form-_79KNyJ-8x06H6N92cVgbO9vUfVsbCS00wu1R9xebj0")
-			.formParam("form_token", "9YGmPru06gD-wnBwgHV7LHMGZHbcE11f9cdNWmwmRWI")
+			.formParam("form_build_id", "{form_build_id}")
+			.formParam("form_token", "{form_token}")
 			.formParam("form_id", "comment_node_article_form")
 			.formParam("op", "Save")
 			.resources(http("request_7")
