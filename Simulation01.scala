@@ -9,6 +9,7 @@ import io.gatling.jdbc.Predef._
 class Simulation01 extends Simulation {
 
 	val serverName = "http://acme.s01.surgery.sbit.io"
+	val waitTime = 1
 
 	val httpProtocol = http
 		.baseURL(serverName)
@@ -39,7 +40,7 @@ class Simulation01 extends Simulation {
 	val scn = scenario("Simulation01")
 		.exec(http("request_0")
 			.get("/"))
-		.pause(5)
+		.pause(waitTime)
 		.exec(http("request_1")
 			.post("/node?destination=node")
 			.headers(headers_1)
@@ -48,21 +49,21 @@ class Simulation01 extends Simulation {
 			.formParam("form_build_id", "form-dWA0xOwJqgkgSuYxTkEZuhPxu8HRcs4JSci07azqMZk")
 			.formParam("form_id", "user_login_block")
 			.formParam("op", "Log in"))
-		.pause(2)
+		.pause(waitTime)
 		.exec(http("request_2")
 			.get("/node/add")
 			.resources(http("request_3")
 			.get(uri1 + "/js/admin_menu/cache/e6f55867ebbd479a8f1d4e4611c474fa")
 			.headers(headers_3)))
-		.pause(1)
+		.pause(waitTime)
 		.exec(http("request_4")
 			.get("/node/add/article"))
-		.pause(7)
+		.pause(waitTime)
 		.exec(http("request_5")
 			.post("/node/add/article")
 			.headers(headers_5)
 			.body(RawFileBody("Simulation01_0005_request.txt")))
-		.pause(10)
+		.pause(waitTime)
 		.exec(http("request_6")
 			.post("/comment/reply/2")
 			.headers(headers_1)
