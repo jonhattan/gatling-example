@@ -8,8 +8,10 @@ import io.gatling.jdbc.Predef._
 
 class Simulation01 extends Simulation {
 
+	val serverName = "http://acme.s01.surgery.sbit.io"
+
 	val httpProtocol = http
-		.baseURL("http://acme.s01.surgery.sbit.io")
+		.baseURL(serverName)
 		.inferHtmlResources()
 		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
 		.acceptEncodingHeader("gzip, deflate, sdch")
@@ -19,7 +21,7 @@ class Simulation01 extends Simulation {
 
 	val headers_1 = Map(
 		"Accept-Encoding" -> "gzip, deflate",
-		"Origin" -> "http://acme.s01.surgery.sbit.io")
+		"Origin" -> serverName)
 
 	val headers_3 = Map(
 		"Accept" -> "text/plain, */*; q=0.01",
@@ -28,11 +30,11 @@ class Simulation01 extends Simulation {
 	val headers_5 = Map(
 		"Accept-Encoding" -> "gzip, deflate",
 		"Content-Type" -> "multipart/form-data; boundary=----WebKitFormBoundaryAgBoOLOSw2upMN96",
-		"Origin" -> "http://acme.s01.surgery.sbit.io")
+		"Origin" -> serverName)
 
 	val headers_7 = Map("Accept" -> "image/webp,*/*;q=0.8")
 
-    val uri1 = "http://acme.s01.surgery.sbit.io"
+    val uri1 = serverName
 
 	val scn = scenario("Simulation01")
 		.exec(http("request_0")
